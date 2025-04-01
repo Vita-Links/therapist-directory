@@ -1,0 +1,6 @@
+INFO:     192.168.160.1:33350 - "POST /upload-photo HTTP/1.1" 200 OK
+INFO:     192.168.160.1:33350 - "OPTIONS /profile HTTP/1.1" 200 OK
+INFO:     192.168.160.1:33350 - "PUT /profile HTTP/1.1" 200 OK
+INFO:     192.168.160.1:33362 - "OPTIONS /create-checkout-session HTTP/1.1" 200 OK
+Creating Stripe session for: nathrutter@gmail.com
+INFO:     192.168.160.1:33362 - "POST /create-checkout-session HTTP/1.1" 200 OK

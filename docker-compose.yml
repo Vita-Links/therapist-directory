@@ -35,5 +35,12 @@ services:
     ports:
       - "5050:80"
 
+  frontend:
+    build: ./frontend
+    container_name: therapist-frontend
+    restart: always
+    ports:
+      - "3000:3000"
+
 volumes:
   postgres_data:
