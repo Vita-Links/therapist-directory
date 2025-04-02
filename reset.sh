@@ -1,18 +1,13 @@
 #!/bin/bash
 
-echo "🛑 Stopping all containers..."
-docker-compose down
+echo "🛑 Stopping only therapist directory containers..."
+docker compose -f docker-compose.therapist.yml down
 
-echo "🧹 Pruning Docker system (containers, images, volumes)..."
+echo "🧹 Pruning only unused Docker data (will not touch Nath's volumes or containers)..."
 docker system prune -af --volumes
 
-echo "🗑️ Removing dangling volumes..."
-docker volume prune -f
+echo "🚧 Rebuilding therapist containers with no cache..."
+docker compose -f docker-compose.therapist.yml build --no-cache
 
-echo "🚧 Rebuilding containers with no cache..."
-docker-compose build --no-cache
-
-echo "🚀 Starting all services..."
-docker-compose up -d
-
-echo "✅ All services rebuilt and restarted!"
+echo "🚀 Starting therapist directory stack..."
+docker compose -f docker-compose.therapist.yml up -d

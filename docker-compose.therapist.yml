@@ -24,6 +24,8 @@ services:
       DATABASE_URL: postgresql://admin:adminpassword@db:5432/therapist_directory
     ports:
       - "8001:8001"
+    volumes:
+      - ./backend/uploads:/app/uploads
 
   pgadmin:
     image: dpage/pgadmin4
