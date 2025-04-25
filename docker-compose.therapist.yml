@@ -15,17 +15,20 @@ services:
       - "5432:5432"
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
     container_name: therapist-api
     restart: always
     depends_on:
       - db
     environment:
       DATABASE_URL: postgresql://admin:adminpassword@db:5432/therapist_directory
+      STRIPE_WEBHOOK_SECRET: whsec_BvCVcbVe6ZMPUnxegNbQZsHt3jRGtnal
     ports:
       - "8001:8001"
     volumes:
-      - ./backend/uploads:/app/uploads
+      - ./backend:/code
+      - ./backend/uploads:/code/uploads
 
   pgadmin:
     image: dpage/pgadmin4
