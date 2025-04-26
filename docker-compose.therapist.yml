@@ -7,7 +7,7 @@ services:
     restart: always
     environment:
       POSTGRES_USER: admin
-      POSTGRES_PASSWORD: adminpassword
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: therapist_directory
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -22,8 +22,9 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgresql://admin:adminpassword@db:5432/therapist_directory
-      STRIPE_WEBHOOK_SECRET: whsec_BvCVcbVe6ZMPUnxegNbQZsHt3jRGtnal
+      DATABASE_URL: postgresql://admin:${POSTGRES_PASSWORD}@db:5432/therapist_directory
+    env_file:
+      - .env
     ports:
       - "8001:8001"
     volumes:
@@ -36,7 +37,7 @@ services:
     restart: always
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@example.com
-      PGADMIN_DEFAULT_PASSWORD: adminpassword
+      PGADMIN_DEFAULT_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5050:80"
 
@@ -49,3 +50,4 @@ services:
 
 volumes:
   postgres_data:
+
